@@ -97,41 +97,128 @@ def waypointGeneration(streamingClient):
 	# State number of waypoints and list them below. Note units are in cm and 
 	# order is (x,y,z) in the standard aircraft coordinate system.
 	# Remember, forward x, right y, down z
-	num_of_waypoints = 4
+	num_of_waypoints = 8  # 16 for Flight Path 8 / 8 for Circle
 	waypoint = np.zeros([num_of_waypoints, 3])
 
 	# Waypoint 1 is the starting point
 	waypoint[0] = start_position
 
-	# Put Waypoint 1 here
-	waypoint[1] = waypoint[0] + np.array([100, 0, 0])
-
-	# Put Waypoint 2 here
-	waypoint[2] = waypoint[1] + np.array([0, -100, 0])
-
-	# Put Waypoint 3 here
-	waypoint[3] = waypoint[2] + np.array([-100, 0, 0])
-
 	# # Put Waypoint 1 here
-	# waypoint[1] = waypoint[0] + np.array([100, 100, 0])
+	# waypoint[1] = waypoint[0] + np.array([14.64, -35.36, 0])
 	#
 	# # Put Waypoint 2 here
-	# waypoint[2] = waypoint[1] + np.array([0, 100, 0])
+	# waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 0])
 	#
 	# # Put Waypoint 3 here
-	# waypoint[3] = waypoint[2] + np.array([-100, 100, 0])
+	# waypoint[3] = waypoint[2] + np.array([35.36, 14.64, 0])
 	#
 	# # Put Waypoint 4 here
-	# waypoint[4] = waypoint[3] + np.array([-100, 0, 0])
+	# waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 0])
 	#
 	# # Put Waypoint 5 here
-	# waypoint[5] = waypoint[4] + np.array([-10, -100, 0])
+	# waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, 0])
 	#
 	# # Put Waypoint 6 here
-	# waypoint[6] = waypoint[5] + np.array([0, -100, 0])
+	# waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 0])
 	#
 	# # Put Waypoint 7 here
-	# waypoint[7] = waypoint[6] + np.array([100, -100, 0])
+	# waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, 0])
+	#
+	# ################### Flight Path 8 Starts Here ###############
+	#
+	# # Put Waypoint 8 here
+	# waypoint[8] = waypoint[7] + np.array([-14.64, -35.36, 0])
+	#
+	# # Put Waypoint 9 here
+	# waypoint[9] = waypoint[8] + np.array([-14.64, -35.36, 0])
+	#
+	# # Put Waypoint 10 here
+	# waypoint[10] = waypoint[9] + np.array([-35.36, -14.64, 0])
+	#
+	# # Put Waypoint 11 here
+	# waypoint[11] = waypoint[10] + np.array([-35.36, 14.64, 0])
+	#
+	# # Put Waypoint 12 here
+	# waypoint[12] = waypoint[11] + np.array([-14.64, 35.36, 0])
+	#
+	# # Put Waypoint 13 here
+	# waypoint[13] = waypoint[12] + np.array([14.64, 35.36, 0])
+	#
+	# # Put Waypoint 14 here
+	# waypoint[14] = waypoint[13] + np.array([35.36, 14.64, 0])
+	#
+	# # Put Waypoint 15 here
+	# waypoint[15] = waypoint[14] + np.array([35.36, -14.64, 0])
+
+	###################### 3D Circular ############################
+
+	# Put Waypoint 1 here
+	waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -10])
+
+	# Put Waypoint 2 here
+	waypoint[2] = waypoint[1] + np.array([35.36, -14.64, -25])
+
+	# Put Waypoint 3 here
+	waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -25])
+
+	# Put Waypoint 4 here
+	waypoint[4] = waypoint[3] + np.array([14.64, 35.36, -10])
+
+	# Put Waypoint 5 here
+	waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, 10])
+
+	# Put Waypoint 6 here
+	waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 25])
+
+	# Put Waypoint 7 here
+	waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, 25])
+
+	###################### 3D 8 ###################################
+
+	# # Put Waypoint 1 here
+	# waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -10])
+	#
+	# # Put Waypoint 2 here
+	# waypoint[2] = waypoint[1] + np.array([35.36, -14.64, -25])
+	#
+	# # Put Waypoint 3 here
+	# waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -25])
+	#
+	# # Put Waypoint 4 here
+	# waypoint[4] = waypoint[3] + np.array([14.64, 35.36, -10])
+	#
+	# # Put Waypoint 5 here
+	# waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, 10])
+	#
+	# # Put Waypoint 6 here
+	# waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 25])
+	#
+	# # Put Waypoint 7 here
+	# waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, 25])
+	#
+	# # Put Waypoint 8 here
+	# waypoint[8] = waypoint[7] + np.array([-14.64, -35.36, 0])
+	#
+	# # Put Waypoint 9 here
+	# waypoint[9] = waypoint[8] + np.array([-14.64, -35.36, 10])
+	#
+	# # Put Waypoint 10 here
+	# waypoint[10] = waypoint[9] + np.array([-35.36, -14.64, 25])
+	#
+	# # Put Waypoint 11 here
+	# waypoint[11] = waypoint[10] + np.array([-35.36, 14.64, 25])
+	#
+	# # Put Waypoint 12 here
+	# waypoint[12] = waypoint[11] + np.array([-14.64, 35.36, 10])
+	#
+	# # Put Waypoint 13 here
+	# waypoint[13] = waypoint[12] + np.array([14.64, 35.36, -10])
+	#
+	# # Put Waypoint 14 here
+	# waypoint[14] = waypoint[13] + np.array([35.36, 14.64, -25])
+	#
+	# # Put Waypoint 15 here
+	# waypoint[15] = waypoint[14] + np.array([35.36, -14.64, -25])
 
 
 	# UPDATE NUM OF WAYPOINTS ABOVE
@@ -158,7 +245,7 @@ def waypointUpdate(streamingClient, true_state, waypoint):
 
 	# Distance to the next waypoint. Transition to next if within 50 cm.
 	distance_to_waypoint = np.linalg.norm(r_wd)
-	if distance_to_waypoint < 15:
+	if distance_to_waypoint < 25:
 		waypointUpdate.current_waypoint += 1
 		# r_wd will  be updated in next iteration to avoid IndexError's.
 

@@ -12,7 +12,6 @@ from position2 import (startTracking, trueState, waypointGeneration,
 # Initialise Tello
 tello = Tello2()
 tello.getBattery()
-# tello.startStateCapture()
 tello.rc()	# reset controls to zeros
 
 fly = True

@@ -17,7 +17,7 @@ fly = True
 if fly:
     tello.takeoff()
     time.sleep(10)
-    tello.move('up', 100)
+    tello.move('up', 200)
     time.sleep(5)
 
 # Setup connection with optitrack and the waypoints

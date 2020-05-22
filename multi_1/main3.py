@@ -12,7 +12,6 @@ from position3 import (startTracking, trueState, waypointGeneration,
 # Initialise Tello
 tello = Tello3()
 tello.getBattery()
-# tello.startStateCapture()
 tello.rc()	# reset controls to zeros
 
 fly = True
@@ -20,7 +19,7 @@ if fly:
     tello.takeoff()
     # tello.land()
     time.sleep(10)
-    tello.move('up', 150)
+    tello.move('up', 140)
     # tello.rc(0,10,0,40)
     time.sleep(5)
     # tello.land()

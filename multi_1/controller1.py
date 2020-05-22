@@ -56,7 +56,7 @@ def controllerWaypoint(error, prev_error, dt, tello1):
 	error_dot = (error - prev_error) / dt
 
 	# PD constants and controller (Standard form)
-	Kp = np.array([0.4, 0.4, 0.4, 1.0])	# lr, fb, ud, yaw
+	Kp = np.array([0.4, 0.7, 1.0, 1.0])	# lr, fb, ud, yaw
 	Td = np.array([0, 0, 0, 0])
 	pid_input = Kp * (error + Td * error_dot)
 
