@@ -153,25 +153,25 @@ def waypointGeneration(streamingClient):
 	###################### 3D Circular ############################
 
 	# Put Waypoint 1 here
-	waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -10])
+	waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -40])
 
 	# Put Waypoint 2 here
-	waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 25])
+	waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 55])
 
 	# Put Waypoint 3 here
-	waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -25])
+	waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -55])
 
 	# Put Waypoint 4 here
-	waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 10])
+	waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 40])
 
 	# Put Waypoint 5 here
-	waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, -10])
+	waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, -40])
 
 	# Put Waypoint 6 here
-	waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 25])
+	waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 55])
 
 	# Put Waypoint 7 here
-	waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, -25])
+	waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, -55])
 
 	###################### 3D 8 ###################################
 
