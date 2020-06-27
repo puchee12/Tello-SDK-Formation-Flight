@@ -14,3 +14,4 @@ Instructions of installing USB driver for the adaptor can be found in the offici
 Formation flight videos can be seen in YouTube channel,
 For single Tello -- https://youtu.be/4wWEGWvcnjI
 Multiple Tello -- https://youtu.be/U3jlVuO5yNs
+This channel contains all the test videos.
