@@ -1,15 +1,10 @@
 import time
 import numpy as np
-from tello3 import Tello3
 from NatNetClient import NatNetClient
 
 
-def startTracking(body_id_drone1, body_id_drone2):
-	'''
-	Initiate the OptiTrack (streamingClient) thread by constructing the object
-	and running it. This is based on the NatNet v3.1 code supplied through
-	NaturalPoint's SDK online.
-	'''
+def connectOptitrack(body_id_drone1, body_id_drone2):
+
 	# This will create a new NatNet client
 	streamingClient = NatNetClient(body_id_drone1, body_id_drone2)
 
@@ -40,13 +35,8 @@ def startTracking(body_id_drone1, body_id_drone2):
 
 
 
-def trueState(streamingClient):
-	'''
-	Retrieves the latest true rigid body state. Note that only one rigid body 
-	should be selected in Motive as this function ignores the ID number. The 
-	position and orientation is changed to a standard coordinate system. The 
-	orientation is returned in Euler angles.
-	'''
+def telloState(streamingClient):
+
 	# Retrieve rigid body data from OptiTrack.
 	id_num = streamingClient.rigidBodyListener[:, 0]
 	pos = streamingClient.rigidBodyListener[:, 1]
@@ -66,112 +56,89 @@ def trueState(streamingClient):
 	return np.array([id_num, rotated_pos, rotated_quat, euler])
 
 
-def estimatedState(rvec, tvec):
-	'''Place holder function for state estimation'''
-	position = np.array([None, None, None])
-	orientation_euler = np.array([None, None, None])
-	return np.array([position, orientation_euler])
 
+def setwaypoint(streamingClient):
 
-def waypointGeneration(streamingClient):
-	'''
-	Generate your waypoints here by manually specifying or use a mathematical
-	function to generate a shape. Note that the waypoints can be made relative 
-	to other waypoints which avoids the use of the absolute (world) frame of 
-	reference. The controller defaults back to the first waypoint (waypoint[0]) 
-	upon reaching the final waypoint (see waypointUpdate()).
-	'''
-	# theta = np.linspace(0, 2*np.pi, 100)
-	# radius = 150	# cm
-	# x = radius * np.sin(theta)
-	# y = radius * np.cos(theta)
-	# z = np.ones(100) * -200
-	#
-	# waypoint = np.zeros([100, 3])
-	# waypoint[:, 0] = x
-	# waypoint[:, 1] = y
-	# waypoint[:, 2] = z
-
-	start_position = trueState(streamingClient)[1][0,:]	# of tello
+	start_position = telloState(streamingClient)[1][0,:]	# of tello
 
 	# State number of waypoints and list them below. Note units are in cm and 
 	# order is (x,y,z) in the standard aircraft coordinate system.
 	# Remember, forward x, right y, down z
-	num_of_waypoints = 8  # 16 for Flight Path 8 / 8 for Circle
+	num_of_waypoints = 16  # 16 for Flight Path 8 / 8 for Circle
 	waypoint = np.zeros([num_of_waypoints, 3])
 
 	# Waypoint 1 is the starting point
 	waypoint[0] = start_position
 
-	# # Put Waypoint 1 here
-	# waypoint[1] = waypoint[0] + np.array([14.64, -35.36, 0])
-	#
-	# # Put Waypoint 2 here
-	# waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 0])
-	#
-	# # Put Waypoint 3 here
-	# waypoint[3] = waypoint[2] + np.array([35.36, 14.64, 0])
-	#
-	# # Put Waypoint 4 here
-	# waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 0])
-	#
-	# # Put Waypoint 5 here
-	# waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, 0])
-	#
-	# # Put Waypoint 6 here
-	# waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 0])
-	#
-	# # Put Waypoint 7 here
-	# waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, 0])
-	#
-	# ################### Flight Path 8 Starts Here ###############
-	#
-	# # Put Waypoint 8 here
-	# waypoint[8] = waypoint[7] + np.array([-14.64, -35.36, 0])
-	#
-	# # Put Waypoint 9 here
-	# waypoint[9] = waypoint[8] + np.array([-14.64, -35.36, 0])
-	#
-	# # Put Waypoint 10 here
-	# waypoint[10] = waypoint[9] + np.array([-35.36, -14.64, 0])
-	#
-	# # Put Waypoint 11 here
-	# waypoint[11] = waypoint[10] + np.array([-35.36, 14.64, 0])
-	#
-	# # Put Waypoint 12 here
-	# waypoint[12] = waypoint[11] + np.array([-14.64, 35.36, 0])
-	#
-	# # Put Waypoint 13 here
-	# waypoint[13] = waypoint[12] + np.array([14.64, 35.36, 0])
-	#
-	# # Put Waypoint 14 here
-	# waypoint[14] = waypoint[13] + np.array([35.36, 14.64, 0])
-	#
-	# # Put Waypoint 15 here
-	# waypoint[15] = waypoint[14] + np.array([35.36, -14.64, 0])
+	# Put Waypoint 1 here
+	waypoint[1] = waypoint[0] + np.array([14.64, -35.36, 0])
+
+	# Put Waypoint 2 here
+	waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 0])
+
+	# Put Waypoint 3 here
+	waypoint[3] = waypoint[2] + np.array([35.36, 14.64, 0])
+
+	# Put Waypoint 4 here
+	waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 0])
+
+	# Put Waypoint 5 here
+	waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, 0])
+
+	# Put Waypoint 6 here
+	waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 0])
+
+	# Put Waypoint 7 here
+	waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, 0])
+
+	################### Flight Path 8 Starts Here ###############
+
+	# Put Waypoint 8 here
+	waypoint[8] = waypoint[7] + np.array([-14.64, -35.36, 0])
+
+	# Put Waypoint 9 here
+	waypoint[9] = waypoint[8] + np.array([-14.64, -35.36, 0])
+
+	# Put Waypoint 10 here
+	waypoint[10] = waypoint[9] + np.array([-35.36, -14.64, 0])
+
+	# Put Waypoint 11 here
+	waypoint[11] = waypoint[10] + np.array([-35.36, 14.64, 0])
+
+	# Put Waypoint 12 here
+	waypoint[12] = waypoint[11] + np.array([-14.64, 35.36, 0])
+
+	# Put Waypoint 13 here
+	waypoint[13] = waypoint[12] + np.array([14.64, 35.36, 0])
+
+	# Put Waypoint 14 here
+	waypoint[14] = waypoint[13] + np.array([35.36, 14.64, 0])
+
+	# Put Waypoint 15 here
+	waypoint[15] = waypoint[14] + np.array([35.36, -14.64, 0])
 
 	###################### 3D Circular ############################
 
-	# Put Waypoint 1 here
-	waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -40])
-
-	# Put Waypoint 2 here
-	waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 55])
-
-	# Put Waypoint 3 here
-	waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -55])
-
-	# Put Waypoint 4 here
-	waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 40])
-
-	# Put Waypoint 5 here
-	waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, -40])
-
-	# Put Waypoint 6 here
-	waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 55])
-
-	# Put Waypoint 7 here
-	waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, -55])
+	# # Put Waypoint 1 here
+	# waypoint[1] = waypoint[0] + np.array([14.64, -35.36, -40])
+	#
+	# # Put Waypoint 2 here
+	# waypoint[2] = waypoint[1] + np.array([35.36, -14.64, 55])
+	#
+	# # Put Waypoint 3 here
+	# waypoint[3] = waypoint[2] + np.array([35.36, 14.64, -55])
+	#
+	# # Put Waypoint 4 here
+	# waypoint[4] = waypoint[3] + np.array([14.64, 35.36, 40])
+	#
+	# # Put Waypoint 5 here
+	# waypoint[5] = waypoint[4] + np.array([-14.64, 35.36, -40])
+	#
+	# # Put Waypoint 6 here
+	# waypoint[6] = waypoint[5] + np.array([-35.36, 14.64, 55])
+	#
+	# # Put Waypoint 7 here
+	# waypoint[7] = waypoint[6] + np.array([-35.36, -14.64, -55])
 
 	###################### 3D 8 ###################################
 
@@ -227,11 +194,7 @@ def waypointGeneration(streamingClient):
 
 ################## This fucntion is to update the waypoints ########################
 def waypointUpdate(streamingClient, true_state, waypoint):
-	'''
-	Keeps index of which waypoint to track. The waypoint switching is 
-	based on distance so it switches to the next when within a certain range 
-	of the current.
-	'''
+
 	# Attain current position (x,y,z)
 	current_position = true_state[1]
 
@@ -252,11 +215,7 @@ def waypointUpdate(streamingClient, true_state, waypoint):
 	return r_wd
 
 def quaternion2Euler(quat):
-	'''
-	Converts Quaternions to Euler Angles
-	Input: vector 'quat' in [q_x, q_y, q_z, q_w] format
-	Output: vector [phi,theta,psi]' in radians
-	'''
+
 	# Separate variables for the quaternions
 	q0 = quat[3]
 	q1 = quat[0]
@@ -275,11 +234,7 @@ def quaternion2Euler(quat):
 
 
 def Cx(angle):
-	'''
-	DCM for rotation about x axis
-	Input: rotation angle in radians
-	Output: DCM
-	'''
+
 	# Rotation matrix
 	rotate_x = np.array([1, 0, 0,
 		0, np.cos(angle), np.sin(angle),
@@ -292,11 +247,7 @@ def Cx(angle):
 
 
 def Cy(angle):
-	'''
-	DCM for rotation about y axis
-	Input: rotation angle in radians
-	Output: DCM
-	'''
+
 	# Rotation matrix
 	rotate_y = np.array([np.cos(angle), 0, -np.sin(angle),
 			0, 1, 0,
@@ -309,11 +260,7 @@ def Cy(angle):
 
 
 def Cz(angle):
-	'''
-	DCM for rotation about z axis
-	Input: rotation angle in radians
-	Output: DCM
-	'''
+
 	# Rotation matrix
 	rotate_z = np.array([np.cos(angle), np.sin(angle), 0,
 		-np.sin(angle), np.cos(angle), 0,
