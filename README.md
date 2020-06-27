@@ -11,4 +11,6 @@ In this repository the amd64 type disk image of Ubuntu 18.04.03 version is not f
 Each Tello is connected to user's PC by using Wifi adaptors (Tplink T4U) which provides unique netword interface ID. This basically allows each Tello to be connected to a single ground control station.
 Instructions of installing USB driver for the adaptor can be found in the official website https://www.tp-link.com/us/support/download/archer-t4u/#Driver also installation manual can be found in the same directory.
 
-Formation flight videos can be seen in YouTube channel https://youtu.be/4wWEGWvcnjI
+Formation flight videos can be seen in YouTube channel,
+For single Tello -- https://youtu.be/4wWEGWvcnjI
+Multiple Tello -- https://youtu.be/U3jlVuO5yNs
