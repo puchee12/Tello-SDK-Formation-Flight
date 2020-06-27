@@ -15,3 +15,5 @@ Formation flight videos can be seen in YouTube channel,
 For single Tello -- https://youtu.be/4wWEGWvcnjI
 Multiple Tello -- https://youtu.be/U3jlVuO5yNs
 This channel contains all the test videos.
+
+Finalised Zip file can also be found here https://unisydneyedu-my.sharepoint.com/:u:/g/personal/dpar9315_uni_sydney_edu_au/EavuT4RpEsxOuR24zDU06eAB2xTr8i-pip-aykBUjkFlvA?e=lVzFIc
